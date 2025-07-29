@@ -11,11 +11,52 @@
     <p>This is a simplex     snake game by <a href="https://github.com/shohgames/snake">@Shohgames</a></p>
     <p>Have fun playing!</p>
     <!--Damn writing html feels so nostalgic-->
-    
+
    <canvas id="gameCanvas" width="300" height="300">&lt;canvas>
-
-
     
+    <script>
+        /**const**/
+        const canvas_border_color = "blue";
+        const canvas_background_color = "white";
+        const snake_color = "green";
+        const snake_border_color = "black";
+
+
+        /**so the snakes head is moving 10 points in the x, and not it y
+         *hence its a horizontally placed snake**/
+        
+        let snake = [
+        {x: 150, y: 150},
+        {x: 140, y: 150},
+        {x: 130, y: 150},
+        {x: 120, y: 150},
+        {x: 110, y: 150},
+        ];
+
+
+        var gameCanvas = document.getElementById("gameCanvas")
+        var ctx = gameCanvas.getContext("2d");
+        ctx.strokeStyle = canvas_border_color
+        ctx.fillStyle = canvas_background_color
+
+        ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+        ctx.strokeRect(0,0, gameCanvas.width, gameCanvas.height);
+        
+
+        drawSnake();
+        function drawSnake() {
+            snake.forEach(drawSnakePart)
+        }
+        function drawSnakePart(snakePart) {
+            ctx.fillStyle = snake_color;
+            ctx.strokeStyle = snake_border_color;
+            ctx.fillRect(snakePart.x, snakePart.y, 10,10);
+            ctx.strokeRect(snakePart.x, snakePart.y, 10,10);
+        }
+        /**the color is not good, gotta change it to something more 
+         * pleasant to the eye. but until then , it should be fine. **/
+
+    </script>
     
 </body>
 </html>
