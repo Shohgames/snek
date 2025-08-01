@@ -80,7 +80,12 @@
         function moveSnake() {
             const head = {x: snake[0].x + dx, y: snake[0].y + dy};
             snake.unshift(head);
+            const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
+            if (didEatFood) {
+                createFood();
+            } else{
             snake.pop();
+            }
         }
 
       
@@ -105,6 +110,7 @@
         function maintickmove() {
         setTimeout(function onTick() {
         clearCanvas();
+        drawFood();
         moveSnake();
         drawSnake();
         // Call main again
@@ -148,8 +154,30 @@
                 dy = 10;
             }
             
+            
 
         }
+        function rTen(min,max) {
+                return Math.round((Math.random() * (max-min)+min)/10)*10;
+            }
+
+            function createFood() {
+                foodX = rTen(0, gameCanvas.width-10);
+                foodY = rTen(0, gameCanvas.height-10);
+                snake.forEach(function FoodOnSnake(part) {
+                    const FoodIsOnSnake = part.x == foodX && part.y == foodY
+                    if (FoodIsOnSnake)
+                        createFood();
+                });
+            
+            }
+        function drawFood() {
+            ctx.fillStyle = 'red'
+            ctx.strokeStyle = 'darkred'
+            ctx.fillRect(foodX,foodY,10,10)
+            ctx.strokeRect(foodX,foodY,10,10) 
+        }
+
 
     </script>
     
