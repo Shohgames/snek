@@ -1,3 +1,4 @@
+<!--Archive desktop version-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,70 +73,6 @@
 .retry-btn:hover {
     background-color: #45a049;
 }
-/* Add this to your existing <style> section: */
-
-.mobile-controls {
-    margin-top: 20px;
-    display: none; /* Hidden by default, shown on mobile */
-}
-
-.control-row {
-    display: flex;
-    justify-content: center;
-    margin: 5px 0;
-}
-
-.control-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    width: 60px;
-    height: 60px;
-    font-size: 24px;
-    border-radius: 10px;
-    margin: 5px;
-    cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.control-btn:hover {
-    background-color: #45a049;
-}
-
-.control-btn:active {
-    background-color: #3e8e41;
-    transform: scale(0.95);
-}
-
-/* Show mobile controls on touch devices */
-@media (hover: none) and (pointer: coarse) {
-    .mobile-controls {
-        display: block !important;
-    }
-}
-
-/* Mobile responsive adjustments */
-@media (max-width: 600px) {
-    .mobile-controls {
-        display: block;
-    }
-    
-    h1 {
-        font-size: 24px;
-    }
-    
-    p {
-        font-size: 14px;
-        padding: 0 10px;
-    }
-    
-    #gameCanvas {
-        margin: 10px auto;
-    }
-}
     </style>
 </head>
 <body>
@@ -156,16 +93,7 @@
 
 <canvas id="gameCanvas" width="300" height="300"></canvas>
    
-    <div id="mobileControls" class="mobile-controls">
-        <div class="control-row">
-            <button id="upBtn" class="control-btn">↑</button>
-        </div>
-        <div class="control-row">
-            <button id="leftBtn" class="control-btn">←</button>
-            <button id="downBtn" class="control-btn">↓</button>
-            <button id="rightBtn" class="control-btn">→</button>
-        </div>
-    </div>
+    
     <script>
         /**const**/
         const canvas_border_color = "blue";
@@ -316,105 +244,6 @@
             
 
         }
-
-                // Mobile control functions
-                function moveUp() {
-                    if (dy !== 10) { // Prevent reverse
-                        dx = 0;
-                        dy = -10;
-                    }
-                }
-
-                function moveDown() {
-                    if (dy !== -10) { // Prevent reverse
-                        dx = 0;
-                        dy = 10;
-                    }
-                }
-
-                function moveLeft() {
-                    if (dx !== 10) { // Prevent reverse
-                        dx = -10;
-                        dy = 0;
-                    }
-                }
-
-                function moveRight() {
-                    if (dx !== -10) { // Prevent reverse
-                        dx = 10;
-                        dy = 0;
-                    }
-                }
-
-                // Add mobile button event listeners:
-                document.getElementById('upBtn').addEventListener('click', moveUp);
-                document.getElementById('downBtn').addEventListener('click', moveDown);
-                document.getElementById('leftBtn').addEventListener('click', moveLeft);
-                document.getElementById('rightBtn').addEventListener('click', moveRight);
-
-                // Add touch events for better mobile responsiveness
-                document.getElementById('upBtn').addEventListener('touchstart', function(e) {
-                    e.preventDefault();
-                    moveUp();
-                });
-
-                document.getElementById('downBtn').addEventListener('touchstart', function(e) {
-                    e.preventDefault();
-                    moveDown();
-                });
-
-                document.getElementById('leftBtn').addEventListener('touchstart', function(e) {
-                    e.preventDefault();
-                    moveLeft();
-                });
-
-                document.getElementById('rightBtn').addEventListener('touchstart', function(e) {
-                    e.preventDefault();
-                    moveRight();
-                });
-
-
-                // swipe controls 
-
-                let touchStartX = 0;
-                let touchStartY = 0;
-
-                document.addEventListener('touchstart', function(e) {
-                    touchStartX = e.touches[0].clientX;
-                    touchStartY = e.touches[0].clientY;
-                });
-
-                document.addEventListener('touchend', function(e) {
-                    if (!touchStartX || !touchStartY) return;
-                    
-                    let touchEndX = e.changedTouches[0].clientX;
-                    let touchEndY = e.changedTouches[0].clientY;
-                    
-                    let diffX = touchStartX - touchEndX;
-                    let diffY = touchStartY - touchEndY;
-                    
-                    // Minimum swipe distance
-                    if (Math.abs(diffX) > 50 || Math.abs(diffY) > 50) {
-                        if (Math.abs(diffX) > Math.abs(diffY)) {
-                            // Horizontal swipe
-                            if (diffX > 0) {
-                                moveLeft(); // Swipe left
-                            } else {
-                                moveRight(); // Swipe right
-                            }
-                        } else {
-                            // Vertical swipe
-                            if (diffY > 0) {
-                                moveUp(); // Swipe up
-                            } else {
-                                moveDown(); // Swipe down
-                            }
-                        }
-                    }
-                    
-                    touchStartX = 0;
-                    touchStartY = 0;
-                });
         function rTen(min,max) {
                 return Math.round((Math.random() * (max-min)+min)/10)*10;
             }
